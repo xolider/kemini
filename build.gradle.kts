@@ -37,10 +37,18 @@ kotlin {
         nativeMain.dependencies {
             implementation(libs.ktor.client.core)
             implementation(libs.kotlinx.serialization.properties)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
         }
 
         linuxMain.dependencies {
             implementation(libs.ktor.client.curl)
+        }
+        mingwMain.dependencies {
+            implementation(libs.ktor.client.winhttp)
+        }
+        macosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 }

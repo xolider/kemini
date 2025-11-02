@@ -1,14 +1,12 @@
 package dev.vicart.kemini.config
 
 import dev.vicart.kemini.exception.ConfigException
-import dev.vicart.kemini.log.Log
 import io.ktor.utils.io.*
 import io.ktor.utils.io.core.writeText
 import kotlinx.io.buffered
 import kotlinx.io.files.Path
 import kotlinx.io.files.SystemFileSystem
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.properties.decodeFromStringMap
 import kotlinx.serialization.properties.encodeToStringMap
@@ -20,16 +18,7 @@ import kotlinx.serialization.properties.encodeToStringMap
  */
 expect val SystemConfigPath: String
 
-/**
- * Configuration wrapper of the config file
- * @param model The model name to use
- * @param apiKey The API key to use
- */
-@Serializable
-data class ConfigFile(
-    val model: String = "gemini-2.5-flash",
-    val apiKey: String? = null
-)
+
 
 /**
  * Configuration manager
@@ -41,7 +30,7 @@ object Config {
     /**
      * Reads the config from the config file
      */
-    fun readConfig() {
+    fun initConfig() {
         val configDir = Path(SystemConfigPath, "kemini")
         val configFile = Path(configDir, "kemini.conf")
         var generateConfig = false
